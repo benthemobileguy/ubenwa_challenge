@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:ubenwa_challenge/authentication/login/bloc/login_bloc.dart';
 
-class LoginButton extends StatelessWidget {
-  const LoginButton({Key? key}) : super(key: key);
+class CustomButton extends StatelessWidget {
+  final String title;
+  const CustomButton({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +24,9 @@ class LoginButton extends StatelessWidget {
             context.read<LoginBloc>().add(const LoginSubmitted());
           }
               : null,
-          child:const Text(
-            'Login',
-            style: TextStyle(
+          child: Text(
+            title!,
+            style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
                 color: Color(0xffFFFFFF)),

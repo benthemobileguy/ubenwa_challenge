@@ -37,7 +37,7 @@ class LoginForm extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const LoginText(),
+              const HeaderText(title: "Login"),
               const FloatingText(title: 'Email'),
               const UsernameInput(),
               const Padding(padding: EdgeInsets.all(12)),
@@ -48,7 +48,7 @@ class LoginForm extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const LoginButton(),
+              const CustomButton(title: "Login"),
               const SizedBox(
                 height: 50,
               ),

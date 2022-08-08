@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ubenwa_challenge/authentication/signup/view/signup_page.dart';
 
-class SignUpButton extends StatelessWidget {
-  const SignUpButton({
+class LogInButton extends StatelessWidget {
+  const LogInButton({
     Key? key,
   }) : super(key: key);
 
@@ -22,9 +22,9 @@ class SignUpButton extends StatelessWidget {
                       color: Color(0xfff88879c))),
               GestureDetector(
                 onTap: () => {
-                Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SignUpPage())),
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const SignUpPage())),
                 },
                 child: const Text(
                   'SignUp',
