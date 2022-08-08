@@ -11,10 +11,13 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final deviceH = MediaQuery.of(context).size.height;
+    final deviceW  = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      resizeToAvoidBottomInset: false,
+      backgroundColor: const Color(0xffFFFBF8),
       body: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: BlocProvider(
           create: (context) {
             return LoginBloc(
@@ -22,7 +25,27 @@ class LoginPage extends StatelessWidget {
                   RepositoryProvider.of<AuthenticationRepository>(context),
             );
           },
-          child: LoginForm(),
+          child: SizedBox(
+            height: deviceH,
+            width: deviceW,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: deviceH / 10),
+                  child: const Text(
+                    'Test App',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xff333E63)),
+                  ),
+                ),
+                const LoginForm(),
+              ],
+            ),
+          ),
         ),
       ),
     );
