@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ubenwa_challenge/authentication/login/bloc/login_bloc.dart';
+import 'package:ubenwa_challenge/authentication/signup/bloc/signup_bloc.dart';
 import 'package:ubenwa_challenge/authentication/widgets/form-helper.dart';
 
 class PasswordInput extends StatefulWidget {
@@ -14,12 +15,12 @@ class _PasswordInputState extends State<PasswordInput> {
   bool obscurePasswordText = true;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
+    return BlocBuilder<SignUpBloc, SignUpState>(
       buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) {
         return formHelper('........', obscurePasswordText,
             onChanged: (password) =>
-                context.read<LoginBloc>().add(LoginPasswordChanged(password)),
+                context.read<SignUpBloc>().add(SignUpPasswordChanged(password)),
             errorText: state.password.invalid ? 'invalid password' : null,
             suffixIcon: IconButton(
                 icon: Icon(

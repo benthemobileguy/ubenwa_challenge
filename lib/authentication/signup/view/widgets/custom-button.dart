@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:ubenwa_challenge/authentication/login/bloc/login_bloc.dart';
+import 'package:ubenwa_challenge/authentication/signup/bloc/signup_bloc.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
+    return BlocBuilder<SignUpBloc, SignUpState>(
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         return state.status.isSubmissionInProgress
@@ -20,11 +20,11 @@ class CustomButton extends StatelessWidget {
               padding:  const EdgeInsets.symmetric(horizontal: 40, vertical: 12)),
           onPressed: state.status.isValidated
               ? () {
-            context.read<LoginBloc>().add(const LoginSubmitted());
+            context.read<SignUpBloc>().add(const SignUpSubmitted());
           }
               : null,
           child: const Text(
-            "Login",
+            "Sign Up",
             style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,

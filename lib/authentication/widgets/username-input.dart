@@ -12,20 +12,9 @@ class UsernameInput extends StatelessWidget {
       builder: (context, state) {
         return  formHelper('example@gmail.com', false,
           key: const Key('loginForm_usernameInput_textField'),
-          errorText: state.username.invalid ? 'invalid username' : null,
+          errorText: state.username.invalid ? 'invalid email' : null,
           onChanged: (username) =>
-              context.read<LoginBloc>().add(LoginUsernameChanged(username)),
-          validator: (String? value) {
-            if (value!.isEmpty) {
-              return 'email is required';
-            }
-            if (!RegExp(
-                "^[a-zA-Z0-9.!#%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*")
-                .hasMatch(value)) {
-              return 'Please input a valid email address';
-            }
-            return null;
-          },);
+              context.read<LoginBloc>().add(LoginUsernameChanged(username)));
       },
     );
   }

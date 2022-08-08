@@ -4,6 +4,7 @@ import 'package:formz/formz.dart';
 import 'package:ubenwa_challenge/authentication/login/bloc/login_bloc.dart';
 import 'package:ubenwa_challenge/authentication/widgets/floating-text.dart';
 import 'package:ubenwa_challenge/authentication/widgets/forgot-password.dart';
+import 'package:ubenwa_challenge/authentication/widgets/log-in-button.dart';
 import 'package:ubenwa_challenge/authentication/widgets/login-button.dart';
 import 'package:ubenwa_challenge/authentication/widgets/login-text.dart';
 import 'package:ubenwa_challenge/authentication/widgets/password-input.dart';
@@ -21,7 +22,7 @@ class LoginForm extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              const SnackBar(content: Text('Authentication Failure')),
+              const SnackBar(content: Text('Wrong email or password')),
             );
         }
       },
@@ -36,23 +37,23 @@ class LoginForm extends StatelessWidget {
               borderRadius: BorderRadius.circular(30)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: [
-              const HeaderText(title: "Login"),
-              const FloatingText(title: 'Email'),
-              const UsernameInput(),
-              const Padding(padding: EdgeInsets.all(12)),
-              const FloatingText(title: 'Password'),
+            children: const [
+              HeaderText(title: "Login"),
+              FloatingText(title: 'Email'),
+              UsernameInput(),
+              Padding(padding: EdgeInsets.all(12)),
+              FloatingText(title: 'Password'),
               PasswordInput(),
-              const Padding(padding: EdgeInsets.all(12)),
-              const ForgotPassword(),
-              const SizedBox(
+              Padding(padding: EdgeInsets.all(12)),
+              ForgotPassword(),
+              SizedBox(
                 height: 20,
               ),
-              const CustomButton(title: "Login"),
-              const SizedBox(
+              CustomButton(),
+              SizedBox(
                 height: 50,
               ),
-              const SignUpButton(),
+              LogInButton(),
             ],
           ),
         ),

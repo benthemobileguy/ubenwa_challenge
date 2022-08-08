@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ubenwa_challenge/authentication/login/view/login_page.dart';
+import 'package:ubenwa_challenge/authentication/signup/view/signup_page.dart';
 
-class SignUpButton extends StatelessWidget {
-  const SignUpButton({
+class LogInButton extends StatelessWidget {
+  const LogInButton({
     Key? key,
   }) : super(key: key);
 
@@ -15,7 +15,7 @@ class SignUpButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Dont have an account? ',
+              const Text('Already have an account? ',
                   style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w500,
@@ -24,8 +24,7 @@ class SignUpButton extends StatelessWidget {
                 onTap: () => {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => LoginPage())),
+                      MaterialPageRoute(builder: (context) => const SignUpPage())),
                 },
                 child: const Text(
                   'Login',

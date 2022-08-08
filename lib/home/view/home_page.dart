@@ -1,39 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ubenwa_challenge/authentication/bloc/authentication_bloc.dart';
-
-class HomePage extends StatelessWidget {
+import 'package:ubenwa_challenge/home/view/custom-switch.dart';
+class HomePage extends StatefulWidget {
   static Route route() {
-    return MaterialPageRoute<void>(builder: (_) => HomePage());
+    return MaterialPageRoute<void>(builder: (_) => const HomePage());
   }
+  const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool isSwitchChanged = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Builder(
-              builder: (context) {
-                final userId = context.select(
-                  (AuthenticationBloc bloc) => bloc.state.user.id,
-                );
-                return Text('UserID: $userId');
-              },
-            ),
-            ElevatedButton(
-              child: const Text('Logout'),
-              onPressed: () {
-                context
-                    .read<AuthenticationBloc>()
-                    .add(AuthenticationLogoutRequested());
-              },
-            ),
+      backgroundColor: const Color(0xffFBF5FF),
+      appBar: AppBar(title: const Text('Home',
+        style: TextStyle(
+            fontSize: 21,
+            fontWeight: FontWeight.w700,
+            color: Colors.white),),
+          actions: [
+            flutterSwitch(isSwitchChanged, onToggle: (val){
+              setState(() {
+                isSwitchChanged = !isSwitchChanged;
+              });
+            })
           ],
-        ),
-      ),
+          centerTitle: false,
+          backgroundColor: const Color(0xffF9923B)),
+
     );
   }
 }

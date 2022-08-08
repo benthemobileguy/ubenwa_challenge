@@ -20,9 +20,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final AuthenticationRepository _authenticationRepository;
 
   void _onUsernameChanged(
-      SignUpUsernameChanged event,
-      Emitter<SignUpState> emit,
-      ) {
+    SignUpUsernameChanged event,
+    Emitter<SignUpState> emit,
+  ) {
     final username = Username.dirty(event.username);
     emit(state.copyWith(
       username: username,
@@ -31,9 +31,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   void _onPasswordChanged(
-      SignUpPasswordChanged event,
-      Emitter<SignUpState> emit,
-      ) {
+    SignUpPasswordChanged event,
+    Emitter<SignUpState> emit,
+  ) {
     final password = Password.dirty(event.password);
     emit(state.copyWith(
       password: password,
@@ -42,16 +42,22 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   void _onSubmitted(
-      SignUpSubmitted event,
-      Emitter<SignUpState> emit,
-      ) async {
+    SignUpSubmitted event,
+    Emitter<SignUpState> emit,
+  ) async {
     if (state.status.isValidated) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
       try {
-        await _authenticationRepository.logIn(
+        final res = await _authenticationRepository.signUp(
           username: state.username.value,
           password: state.password.value,
+          email: state.username.value,
         );
+        if(res.statusCode == 200){
+          emit(state.copyWith(status: FormzStatus.submissionSuccess));
+        }else{
+          emit(state.copyWith(status: FormzStatus.submissionFailure));
+        }
         emit(state.copyWith(status: FormzStatus.submissionSuccess));
       } catch (_) {
         emit(state.copyWith(status: FormzStatus.submissionFailure));
