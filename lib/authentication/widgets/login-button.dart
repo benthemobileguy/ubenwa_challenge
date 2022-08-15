@@ -21,8 +21,7 @@ class CustomButton extends StatelessWidget {
           onPressed: state.status.isValidated
               ? () {
             context.read<LoginBloc>().add(const LoginSubmitted());
-          }
-              : null,
+          } : null,
           child: const Text(
             "Login",
             style: TextStyle(

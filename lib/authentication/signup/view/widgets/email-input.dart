@@ -9,24 +9,13 @@ class EmailInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignUpBloc, SignUpState>(
-      buildWhen: (previous, current) => previous.username != current.username,
+      buildWhen: (previous, current) => previous.email != current.email,
       builder: (context, state) {
         return  formHelper('example@gmail.com', false,
-          key: const Key('loginForm_usernameInput_textField'),
-          errorText: state.username.invalid ? 'invalid username' : null,
-          onChanged: (username) =>
-              context.read<SignUpBloc>().add(SignUpUsernameChanged(username)),
-          validator: (String? value) {
-            if (value!.isEmpty) {
-              return 'email is required';
-            }
-            if (!RegExp(
-                "^[a-zA-Z0-9.!#%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*")
-                .hasMatch(value)) {
-              return 'Please input a valid email address';
-            }
-            return null;
-          },);
+          key: const Key('signUpForm_emailInput_textField'),
+          errorText: state.email.invalid ? 'invalid email' : null,
+          onChanged: (email) =>
+              context.read<SignUpBloc>().add(SignUpEmailChanged(email)));
       },
     );
   }

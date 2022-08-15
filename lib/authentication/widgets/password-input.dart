@@ -20,7 +20,7 @@ class _PasswordInputState extends State<PasswordInput> {
         return formHelper('........', obscurePasswordText,
             onChanged: (password) =>
                 context.read<LoginBloc>().add(LoginPasswordChanged(password)),
-            errorText: state.password.invalid ? 'invalid password' : null,
+            errorText: state.password.invalid ? 'Passwords must contain at a dot and comma' : null,
             suffixIcon: IconButton(
                 icon: Icon(
                   obscurePasswordText ? Icons.visibility_off : Icons.visibility,

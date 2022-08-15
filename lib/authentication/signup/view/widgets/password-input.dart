@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ubenwa_challenge/authentication/login/bloc/login_bloc.dart';
 import 'package:ubenwa_challenge/authentication/signup/bloc/signup_bloc.dart';
 import 'package:ubenwa_challenge/authentication/widgets/form-helper.dart';
 
@@ -21,7 +20,7 @@ class _PasswordInputState extends State<PasswordInput> {
         return formHelper('........', obscurePasswordText,
             onChanged: (password) =>
                 context.read<SignUpBloc>().add(SignUpPasswordChanged(password)),
-            errorText: state.password.invalid ? 'invalid password' : null,
+            errorText: state.password.invalid ? 'Passwords must contain at a least a dot and comma' : null,
             suffixIcon: IconButton(
                 icon: Icon(
                   obscurePasswordText ? Icons.visibility_off : Icons.visibility,

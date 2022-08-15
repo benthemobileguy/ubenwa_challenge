@@ -4,6 +4,8 @@ import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:ubenwa_challenge/authentication/login/models/password.dart';
 import 'package:ubenwa_challenge/authentication/login/models/username.dart';
+
+import '../../login/models/email.dart';
 part 'signup_event.dart';
 part 'signup_state.dart';
 
@@ -14,6 +16,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         super(const SignUpState()) {
     on<SignUpUsernameChanged>(_onUsernameChanged);
     on<SignUpPasswordChanged>(_onPasswordChanged);
+    on<SignUpEmailChanged>(_onEmailChanged);
     on<SignUpSubmitted>(_onSubmitted);
   }
 
@@ -26,7 +29,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     final username = Username.dirty(event.username);
     emit(state.copyWith(
       username: username,
-      status: Formz.validate([state.password, username]),
+      status: Formz.validate([state.username, username]),
     ));
   }
 
@@ -37,10 +40,20 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     final password = Password.dirty(event.password);
     emit(state.copyWith(
       password: password,
-      status: Formz.validate([password, state.username]),
+      status: Formz.validate([password, state.password]),
     ));
   }
 
+  void _onEmailChanged(
+      SignUpEmailChanged event,
+      Emitter<SignUpState> emit,
+      ) {
+    final email = Email.dirty(event.email);
+    emit(state.copyWith(
+      email: email,
+      status: Formz.validate([email, state.email]),
+    ));
+  }
   void _onSubmitted(
     SignUpSubmitted event,
     Emitter<SignUpState> emit,
@@ -49,9 +62,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
       try {
         final res = await _authenticationRepository.signUp(
-          username: state.username.value,
+          username: state.email.value,
           password: state.password.value,
-          email: state.username.value,
+          email: state.email.value,
         );
         if(res.statusCode == 200){
           emit(state.copyWith(status: FormzStatus.submissionSuccess));

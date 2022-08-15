@@ -12,21 +12,10 @@ class UsernameInput extends StatelessWidget {
       buildWhen: (previous, current) => previous.username != current.username,
       builder: (context, state) {
         return  formHelper('Jane Doe', false,
-          key: const Key('loginForm_usernameInput_textField'),
-          errorText: state.username.invalid ? 'invalid username' : null,
+          key: const Key('signUpForm_usernameInput_textField'),
+          errorText: state.username.invalid ? 'username is required' : null,
           onChanged: (username) =>
-              context.read<SignUpBloc>().add(SignUpUsernameChanged(username)),
-          validator: (String? value) {
-            if (value!.isEmpty) {
-              return 'Username is required';
-            }
-            if (!RegExp(
-                "^[a-zA-Z0-9.!#%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*")
-                .hasMatch(value)) {
-              return 'Please input a valid email address';
-            }
-            return null;
-          },);
+              context.read<SignUpBloc>().add(SignUpUsernameChanged(username)));
       },
     );
   }
