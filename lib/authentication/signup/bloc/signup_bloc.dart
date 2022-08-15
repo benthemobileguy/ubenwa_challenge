@@ -58,7 +58,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     SignUpSubmitted event,
     Emitter<SignUpState> emit,
   ) async {
-    if (state.status.isValidated) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
       try {
         final res = await _authenticationRepository.signUp(
@@ -76,5 +75,4 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         emit(state.copyWith(status: FormzStatus.submissionFailure));
       }
     }
-  }
 }

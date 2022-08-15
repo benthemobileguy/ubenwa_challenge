@@ -18,10 +18,13 @@ class CustomButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(primary:const Color(0xffF9923B),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               padding:  const EdgeInsets.symmetric(horizontal: 40, vertical: 12)),
-          onPressed: state.status.isValidated
+        /*  onPressed: state.status.isValidated
               ? () {
             context.read<SignUpBloc>().add(const SignUpSubmitted());
-          } : null,
+          } : null,*/
+          onPressed:() {
+            context.read<SignUpBloc>().add(const SignUpSubmitted());
+          },
           child: const Text(
             "Sign Up",
             style: TextStyle(

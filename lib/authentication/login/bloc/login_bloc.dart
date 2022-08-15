@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:ubenwa_challenge/authentication/login/models/password.dart';
 import 'package:ubenwa_challenge/authentication/login/models/email.dart';
+import 'package:user_repository/user_repository.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -19,7 +20,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   final AuthenticationRepository _authenticationRepository;
-
   void _onUsernameChanged(
     LoginUsernameChanged event,
     Emitter<LoginState> emit,

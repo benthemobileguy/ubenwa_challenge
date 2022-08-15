@@ -51,7 +51,6 @@ class AuthenticationRepository {
     } else {
       _controller.add(AuthenticationStatus.unauthenticated);
     }
-    print(response.body);
     return response;
   }
 
