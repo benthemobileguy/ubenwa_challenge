@@ -1,15 +1,17 @@
+import 'dart:convert';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:ubenwa_challenge/authentication/login/models/password.dart';
 import 'package:ubenwa_challenge/authentication/login/models/email.dart';
-import 'package:user_repository/user_repository.dart';
+import 'package:ubenwa_challenge/newborn/data/session-manager.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
-class LoginBloc extends Bloc<LoginEvent, LoginState> {
+class LoginBloc extends HydratedBloc<LoginEvent, LoginState> {
   LoginBloc({
     required AuthenticationRepository authenticationRepository,
   })  : _authenticationRepository = authenticationRepository,
@@ -54,6 +56,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           password: state.password.value,
         );
        if(res.statusCode == 200){
+         final Map<String, dynamic> data = json.decode(res.body);
+         //Save token to local storage
+         SessionManager().authToken = data['token'];
          emit(state.copyWith(status: FormzStatus.submissionSuccess));
        }else{
          emit(state.copyWith(status: FormzStatus.submissionFailure));
@@ -62,5 +67,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(state.copyWith(status: FormzStatus.submissionFailure));
       }
     }
+  }
+
+  @override
+  LoginState? fromJson(Map<String, dynamic> json) {
+    return null;
+  }
+
+  @override
+  Map<String, dynamic>? toJson(LoginState state) {
+    return null;
   }
 }

@@ -18,12 +18,13 @@ Widget flutterSwitch(bool value, {required void Function(bool) onToggle}) {
     ),
     activeIcon: const Icon(
       Icons.online_prediction_outlined,
-      color: Colors.black,
+      color: Colors.deepOrangeAccent,
     ),
     inactiveIcon: const Icon(
       Icons.airplanemode_on,
       color: Colors.black,
     ),
+    activeTextColor: Colors.white,
     activeColor: Colors.white10,
   );
 }

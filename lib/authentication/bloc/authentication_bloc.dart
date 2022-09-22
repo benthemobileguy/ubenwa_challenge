@@ -1,8 +1,8 @@
 import 'dart:async';
-
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:ubenwa_challenge/newborn/data/session-manager.dart';
 import 'package:user_repository/user_repository.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
@@ -40,7 +40,10 @@ class AuthenticationBloc
   ) async {
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
-        return emit(const AuthenticationState.unauthenticated());
+        final user = await _tryGetUser();
+        return emit(SessionManager().authToken == ""?
+        const AuthenticationState.unauthenticated():
+        AuthenticationState.authenticated(user));
       case AuthenticationStatus.authenticated:
         final user = await _tryGetUser();
         return emit(user != null

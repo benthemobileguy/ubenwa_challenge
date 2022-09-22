@@ -18,12 +18,21 @@ dependencies:
   connectivity_plus: ^2.3.6
   path_provider: ^2.0.11
   google_fonts: ^3.0.1
-  hydrated_bloc: ^9.0.0-dev
+  hydrated_bloc: ^8.1.0
+  shimmer: ^2.0.0
   mocktail: ^0.3.0
   authentication_repository:
     path: packages/authentication_repository
   user_repository:
     path: packages/user_repository
+  newborn_repository:
+    path: packages/newborn_repository
+  shared_preferences: ^2.0.15
+  record: ^4.4.0
+  flutter_background_service: ^2.3.9
+  flutter_local_notifications: ^11.0.0
+  device_info_plus: ^4.1.2
+  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_test:

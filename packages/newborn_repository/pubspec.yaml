@@ -1,0 +1,10 @@
+name: newborn_repository
+description: Dart package which manages the authentication domain.
+publish_to: none
+
+environment:
+  sdk: ">=2.16.0 <3.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^0.13.4
